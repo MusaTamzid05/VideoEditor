@@ -1,8 +1,14 @@
 package main
 
-import "video_editor/editor"
+import (
+	"fmt"
+	"video_editor/data"
+)
 
 func main() {
-	editor := editor.NewEditor()
-	editor.Process()
+	t1 := data.NewTime(6, 5, 7)
+	fmt.Println(t1.String())
+
+	t2 := data.NewTime(11, 12, 13)
+	fmt.Println(t2.String())
 }
