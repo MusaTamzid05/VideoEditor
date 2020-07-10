@@ -3,13 +3,14 @@ package data
 import "fmt"
 
 type Time struct {
-	hour   int
-	minute int
-	second int
+	Hour     int
+	Minute   int
+	Second   int
+	Duration int
 }
 
-func NewTime(hour, minute, second int) *Time {
-	return &Time{hour: hour, minute: minute, second: second}
+func NewTime(hour, minute, second, duration int) *Time {
+	return &Time{Hour: hour, Minute: minute, Second: second, Duration: duration}
 }
 
 func (t *Time) convertString(val int) string {
@@ -23,9 +24,9 @@ func (t *Time) convertString(val int) string {
 
 func (t *Time) String() string {
 
-	hourStr := t.convertString(t.hour)
-	minuteStr := t.convertString(t.minute)
-	secondStr := t.convertString(t.second)
+	hourStr := t.convertString(t.Hour)
+	minuteStr := t.convertString(t.Minute)
+	secondStr := t.convertString(t.Second)
 
 	return fmt.Sprintf("%s:%s:%s", hourStr, minuteStr, secondStr)
 }

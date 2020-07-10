@@ -10,9 +10,9 @@ type Editor struct {
 	path string
 }
 
-func (e *Editor) ExtractClip(output string, startTime data.Time, duration int) error {
+func (e *Editor) ExtractClip(output string, startTime data.Time) error {
 
-	commandStr := fmt.Sprintf("ffmpeg -i %s -ss %s -codec copy -t %d %s", e.path, startTime.String(), duration, output)
+	commandStr := fmt.Sprintf("ffmpeg -i %s -ss %s -codec copy -t %d %s", e.path, startTime.String(), startTime.Duration, output)
 	fmt.Println(commandStr)
 	_, err := util.ExecuteCommand(commandStr)
 	return err
