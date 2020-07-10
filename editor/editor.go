@@ -18,6 +18,29 @@ func (e *Editor) ExtractClip(output string, startTime data.Time) error {
 	return err
 }
 
+func (e *Editor) ExtractClips(output string, times []data.Time) error {
+
+	var err error
+
+	for index, timeData := range times {
+		dstPath := fmt.Sprintf("%s-%d.mp4", output, index)
+		err = e.ExtractClip(dstPath, timeData)
+
+		if err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func (e *Editor) ConvertToMp4(dstPath string) error {
+
+	commandStr := fmt.Sprintf("ffmpeg -i %s -c:v libx24 %s", e.path, dstPath)
+	_, err := util.ExecuteCommand(commandStr)
+	return err
+}
+
 func NewEditor(path string) *Editor {
 	return &Editor{path: path}
 }
