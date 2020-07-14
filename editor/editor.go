@@ -42,6 +42,21 @@ func (e *Editor) ConvertToMp4(dstPath string) error {
 	return err
 }
 
+func (e *Editor) Concatenate(dstPath string, paths []string) error {
+
+	filePathText := "dst.txt"
+
+	err := util.GenereateDstFiles(filePathText, paths)
+
+	if err != nil {
+		return err
+	}
+
+	_, err = util.ExecuteCommand(fmt.Sprintf("ffmpeg -f concat -i %s -c copy %s", filePathText, dstPath))
+
+	return err
+}
+
 func NewEditor(path string) *Editor {
 	return &Editor{path: path}
 }
