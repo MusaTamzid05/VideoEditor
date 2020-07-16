@@ -30,6 +30,8 @@ func (e *Editor) ExtractClips(output string, times []data.Time) ([]string, error
 		if err != nil {
 			return dstPaths, err
 		}
+
+		dstPaths = append(dstPaths, dstPath)
 	}
 
 	return dstPaths, nil
