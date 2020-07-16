@@ -2,6 +2,7 @@ package editor
 
 import (
 	"fmt"
+	"os"
 	"video_editor/data"
 	"video_editor/util"
 )
@@ -25,6 +26,11 @@ func (e *Editor) ExtractClips(output string, times []data.Time) ([]string, error
 
 	for index, timeData := range times {
 		dstPath := fmt.Sprintf("%s-%d.mp4", output, index)
+
+		if util.Exists(dstPath) {
+			fmt.Printf("Removing old %s\n", dstPath)
+			os.Remove(dstPath)
+		}
 		err = e.ExtractClip(dstPath, timeData)
 
 		if err != nil {

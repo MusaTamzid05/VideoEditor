@@ -5,9 +5,11 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"os"
 	"strconv"
 	"strings"
 	"video_editor/data"
+	"video_editor/util"
 )
 
 type TimeJson struct {
@@ -116,7 +118,11 @@ func (v *VideoSpliter) Process(videoPath, timeJsonPath, dstPath string) error {
 		return err
 	}
 
-	fmt.Println(splitVideoPaths)
+	if util.Exists(dstPath) {
+		fmt.Println("Removing old ", dstPath)
+		os.Remove(dstPath)
+	}
+
 	err = videoEditor.Concatenate(dstPath, splitVideoPaths)
 
 	if err != nil {
